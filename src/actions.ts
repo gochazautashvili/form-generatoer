@@ -170,6 +170,10 @@ export const edit_styles = async (styles: StylesType) => {
 
 export const generate_form_links = async (length: number) => {
   try {
+    if (length < 1 || length > 20) {
+      return { error: "Length is not valid" };
+    }
+
     const org = await getOrganization();
 
     if (!org) {
@@ -178,18 +182,21 @@ export const generate_form_links = async (length: number) => {
 
     const form = await db.form.findUnique({
       where: { organizationId: org.id },
+      select: { links: true, id: true },
     });
 
     if (!form) {
-      return { error: "FormId not found" };
+      return { error: "FormId is not valid" };
     }
 
-    const existingLinks = await db.link.findMany({
-      where: { formId: form.id },
-    });
-
-    if (existingLinks.length >= 20) {
+    if (form.links.length >= 20) {
       return { error: "You already have a 20 link. you can not have more" };
+    }
+
+    if (form.links.length + length > 20) {
+      return {
+        error: `Length is invalid: current links length: ${form.links.length}, you can only have 20 Link`,
+      };
     }
 
     const data = Array.from({ length });
