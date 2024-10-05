@@ -105,7 +105,7 @@ const GeneratedForm = ({ form, edit, linkId }: Props) => {
           borderColor: styles.formBorder,
           borderWidth: styles.borderWidth,
         }}
-        className="flex flex-col gap-5 p-5 border border-black bg-white rounded-lg max-w-[700px] w-full mx-auto font-sans"
+        className="flex flex-col gap-5 p-5 border border-black bg-white rounded-lg max-w-[700px] w-[95%] mx-auto font-sans"
       >
         <div className="flex flex-col gap-1 mb-3">
           <h1 className="text-2xl font-bold text-center">
