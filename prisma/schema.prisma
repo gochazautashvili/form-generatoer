@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+
+  name         String
+  hashPassword String
+
+  form            Form?
+  formSubmissions FormSubmissions[]
+
+  @@map("organizations")
+}
+
+model Form {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  prompt    String
+  content   String
+  published Boolean @default(false)
+
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String       @unique @db.ObjectId
+
+  background     String @default("#fff")
+  formBackground String @default("#fff")
+  borderColor    String @default("#000")
+  textColor      String @default("#000")
+  formBorder     String @default("#000")
+  borderWidth    Int    @default(1)
+
+  links Link[]
+}
+
+model FormSubmissions {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  content String
+
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String       @db.ObjectId
+
+  link   Link   @relation(fields: [linkId], references: [id])
+  linkId String @db.ObjectId
+}
+
+model Link {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  code     String @unique @default(cuid())
+  link     String @default("")
+  name     String @default("")
+  location String @default("")
+
+  formSubmissions FormSubmissions[]
+
+  form   Form   @relation(fields: [formId], references: [id])
+  formId String @db.ObjectId
+
+  @@map("links")
+}
