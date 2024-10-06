@@ -59,7 +59,10 @@ const DeleteLinkDialog = ({ linkId }: Props) => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete?</DialogTitle>
-          <DialogDescription>This form link will be deleted.</DialogDescription>
+          <DialogDescription>
+            This form link and form submissions based on this link will be
+            deleted.
+          </DialogDescription>
         </DialogHeader>
         <div className="flex items-center justify-end gap-2">
           <Button

@@ -95,6 +95,9 @@ export const delete_form = async () => {
     }
 
     await db.$transaction([
+      db.formSubmissions.deleteMany({
+        where: { organizationId: org.id },
+      }),
       db.link.deleteMany({ where: { form: { organizationId: org.id } } }),
       db.form.delete({ where: { organizationId: org.id } }),
     ]);

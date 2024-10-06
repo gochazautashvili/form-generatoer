@@ -54,7 +54,9 @@ const FormDeleteDialog = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>This form will delete</DialogDescription>
+          <DialogDescription>
+            This form will deleted also links and form submissions
+          </DialogDescription>
         </DialogHeader>
         <div className="flex items-center justify-end gap-3 mt-2">
           <Button disabled={isPending} onClick={handleClose} variant="outline">
