@@ -33,19 +33,21 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { FormDataType, GeneratedFormType } from "@/types";
 import { create_field } from "./actions";
 import { toast } from "@/hooks/use-toast";
+import { parseJson } from "@/lib/utils";
 
 interface Props {
   type: "edit" | "create";
+  content: string | undefined;
   field?: FormDataType;
-  formData: GeneratedFormType;
   onEdit?: () => void;
 }
 
-const CreateFiledDialog = ({ type, field, formData, onEdit }: Props) => {
+const CreateFiledDialog = ({ type, field, content, onEdit }: Props) => {
   const [open, setOpen] = useState(false);
   const [selectedType, setSelectedType] = useState(field?.fieldType || "");
   const [isPending, startGenerate] = useTransition();
 
+  const formData: GeneratedFormType = parseJson(content);
   const options = field?.options?.flatMap((item) => item.value).join(",");
 
   const form = useForm<TFiledSchema>({

@@ -1,5 +1,4 @@
 "use client";
-import { GeneratedFormType } from "@/types";
 import AIGeneratorDialog from "./AiGeneratorDialog";
 import CreateFiledDialog from "./CreateFiledDialog";
 import FormDeleteDialog from "./FormDeleteDialog";
@@ -13,8 +12,6 @@ interface Props {
 }
 
 const Generator = ({ form }: Props) => {
-  const formData: GeneratedFormType = JSON.parse(form?.content || "[]");
-
   return (
     <section className="py-3 fixed bottom-0 left-0 right-0 border-t-2 border-green-500 bg-white/50 backdrop-blur-sm">
       <div className="flex items-center gap-4 w-full max-w-screen-xl mx-auto px-3">
@@ -24,7 +21,7 @@ const Generator = ({ form }: Props) => {
           </Link>
         </Button>
         <AIGeneratorDialog prompt={form?.prompt} />
-        <CreateFiledDialog type="create" formData={formData} />
+        <CreateFiledDialog type="create" content={form?.content} />
         {form && <FormDeleteDialog />}
       </div>
     </section>

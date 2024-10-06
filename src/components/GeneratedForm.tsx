@@ -12,6 +12,7 @@ import MoreButton from "./MoreButton";
 import FormPublishButton from "./FormPublishButton";
 import { format } from "date-fns";
 import { Form, Link } from "@prisma/client";
+import { parseJson } from "@/lib/utils";
 
 interface Props {
   form: Form & { links: Link[] };
@@ -20,8 +21,7 @@ interface Props {
 }
 
 const GeneratedForm = ({ form, edit, linkId }: Props) => {
-  const formData: GeneratedFormType = JSON.parse(form?.content || "[]");
-
+  const formData: GeneratedFormType = parseJson(form?.content);
   const router = useRouter();
   const [isPending, startSubmit] = useTransition();
   const formRef = useRef<HTMLFormElement>(null);
@@ -81,6 +81,14 @@ const GeneratedForm = ({ form, edit, linkId }: Props) => {
   const handleChangeStyles = (type: string, value: string | number) => {
     setStyles((prev) => ({ ...prev, [type]: value }));
   };
+
+  if (!formData) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center ">
+        <h1 className="text-destructive">Something went wrong! try agin.</h1>
+      </div>
+    );
+  }
 
   return (
     <div

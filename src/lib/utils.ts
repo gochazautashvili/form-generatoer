@@ -14,3 +14,13 @@ export const prompts = [
   "Create a service request form for my business with fields for client name, service type, description of the issue, preferred service date, and contact information.",
   "Generate a partnership agreement form that includes partner names, business details, terms of the partnership, and signature fields.",
 ];
+
+export const parseJson = (json: string | null | undefined) => {
+  try {
+    const formData = JSON.parse(json || "[]");
+
+    return formData;
+  } catch (error) {
+    return null;
+  }
+};
