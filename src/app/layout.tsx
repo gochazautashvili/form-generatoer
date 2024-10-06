@@ -7,6 +7,7 @@ import { getOrganization } from "@/data/auth";
 export const metadata: Metadata = {
   title: "Management",
   description: "Management system",
+  icons: { icon: "/form_icon.png" },
 };
 
 export default async function RootLayout({
