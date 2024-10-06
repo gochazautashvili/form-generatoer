@@ -71,12 +71,15 @@ const CreateFiledDialog = ({ type, field, formData, onEdit }: Props) => {
   };
 
   const onSubmit = (values: TFiledSchema) => {
-    const options = values.options?.split(",");
-    const optionsValues = options?.map((item) => {
-      return { value: item, label: item };
-    });
+    const options = values.options ? values.options?.split(",") : undefined;
 
-    const editFormFields = formData?.formFields.map((item) => {
+    const optionsValues = options
+      ? options?.map((item) => {
+          return { value: item, label: item };
+        })
+      : undefined;
+
+    const editFormFields = formData?.formFields?.map((item) => {
       if (item.id === field?.id) {
         return {
           placeholder: values.placeholder,

@@ -90,6 +90,8 @@ const GeneratedForm = ({ form, edit, linkId }: Props) => {
     );
   }
 
+  console.log(formData);
+
   return (
     <div
       style={{

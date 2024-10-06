@@ -48,7 +48,7 @@ const FormPublishButton = ({ handleChangeStyles, styles, form }: Props) => {
         {isPending && <Loader2 className="animate-spin mr-3 size-4" />}
         {form.published ? "Unpublish Form" : "Publish Form"}
       </Button>
-      {form.published && (
+      {form.published && form.links.length && (
         <Button asChild className="bg-green-500" disabled={!form.published}>
           <Link href={form.links[0].link}>Preview</Link>
         </Button>
