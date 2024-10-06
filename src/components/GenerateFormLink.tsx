@@ -1,7 +1,7 @@
 "use client";
 import { useState, useTransition } from "react";
 import { Button } from "./ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, Pencil } from "lucide-react";
 import { generate_form_links } from "@/actions";
 import { toast } from "@/hooks/use-toast";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -33,7 +33,7 @@ const GenerateFormLink = () => {
       <PopoverTrigger asChild>
         <Button className="bg-orange-500 hover:bg-orange-700 h-8" size="sm">
           {isPending && <Loader2 className="animate-spin mr-3 size-4" />}
-          Generate Form Links
+          <Pencil className="size-4 mr-2" /> Generate Form Links
         </Button>
       </PopoverTrigger>
       <PopoverContent className="flex flex-col gap-1">

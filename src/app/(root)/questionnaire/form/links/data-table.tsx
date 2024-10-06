@@ -11,7 +11,6 @@ import {
   VisibilityState,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-
 import {
   Table,
   TableBody,
@@ -23,16 +22,14 @@ import {
 import { useState } from "react";
 import { DataTablePagination } from "./DataTablePagination";
 import { DataTableViewOptions } from "./DataTableViewOptions";
+import { Link } from "@prisma/client";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
+  columns: ColumnDef<Link, Link>[];
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function DataTable({ columns, data }: DataTableProps<Link, Link>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

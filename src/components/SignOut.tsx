@@ -3,7 +3,7 @@ import { org_sign_out } from "@/app/auth/actions";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, LogOut } from "lucide-react";
 
 const SignOut = () => {
   const [isPending, startTransition] = useTransition();
@@ -21,6 +21,7 @@ const SignOut = () => {
   return (
     <Button disabled={isPending} onClick={handleSignOut}>
       {isPending && <Loader2 className="animate-spin size-4 mr-3" />}
+      <LogOut className="size-4 mr-3" />
       Sign out
     </Button>
   );

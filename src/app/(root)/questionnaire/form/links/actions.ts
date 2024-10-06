@@ -61,3 +61,23 @@ export const edit_link = async (
     };
   }
 };
+
+export const delete_all_link = async (linkIds: string[]) => {
+  try {
+    await db.$transaction([
+      db.formSubmissions.deleteMany({
+        where: { linkId: { in: linkIds } },
+      }),
+      db.link.deleteMany({
+        where: { id: { in: linkIds } },
+      }),
+    ]);
+
+    revalidatePath("questionnaire/form/links");
+    return { success: true, message: "Links successfully deleted" };
+  } catch (e) {
+    console.log(e);
+
+    return { error: "Something went wrong! while deleting links" };
+  }
+};

@@ -23,7 +23,7 @@ const SuccessPage = async ({ params: { resId } }: Props) => {
           return (
             <div
               key={i}
-              className="flex items-center gap-2 border-b border-black py-1 last:border-none last:pb-0 first:pt-0"
+              className="flex items-start gap-2 border-b border-black py-1 last:border-none last:pb-0 first:pt-0"
             >
               <h1 className="font-bold">{filed.filedName}: </h1>
               <p className="font-medium">{filed.filedValue}</p>
